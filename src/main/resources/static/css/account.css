@@ -1,0 +1,126 @@
+html,body{
+    padding:0;
+    margin:0;
+    height:100%;
+    background-color: #fafafa;
+    font-size:0.9em;
+    display:flex;
+    width:100%;
+}
+a{
+    text-decoration: none;
+}
+::placeholder {
+    color: #999999;
+    opacity: 1; /* Firefox */
+}
+
+#main_section{
+    justify-content: center;
+    margin : auto auto;
+}
+#main_box{
+    justify-content: center;
+    width: 350px;
+    margin: 12px auto 0 auto;
+}
+#login_box{
+    padding:10px 0 20px 0;
+}
+#logo{
+    width:178px;
+    margin:20px auto 5px auto;
+    height:60px;
+    background: url("/images/logo.png") no-repeat;
+}
+.form_box{
+    width:275px;
+    margin: 0 auto;
+}
+#account_check_box{
+    padding : 10px 0;
+}
+.white_box{
+    width:100%;
+    background-color: white;
+    border: 1px solid #ececec;
+    margin:10px auto;
+    text-align: center;
+}
+.input_box{
+    background-color: #fafafa;
+    border-radius: 3px;
+    width:96% ;
+    height:35px;
+    border: 0.5px solid #0000000a;
+    font-size:0.8em;
+    padding-left: 10px;
+}
+.btn_non_active,.btn_active{
+    background-color: #bedcfa;
+    width:100%;
+    margin-top:5px;
+    height:27px;
+    color:white;
+    border-style: none;
+    border-radius: 3px;
+    padding:0;
+    font-size:1em;
+}
+.btn_active{
+    background-color: #2591f4;
+
+}
+.form_box table{
+    width:100%;
+    text-align: center;
+    margin-bottom : 15px;
+    border-spacing: 4px;
+}
+#login_box a{
+    font-size:0.8em;
+    color: #00316a;
+}
+#account_check_box a {
+    color: #2591f4;
+}
+#download_box img{
+    width:135px;
+    margin : 5px 3px;
+}
+#download_box{
+    font-size:1em;
+    width: 300px;
+    margin: 20px auto;
+    text-align: center;
+}
+#sign_up_box p:nth-of-type(1){
+    font-size:1.2em;
+    color: #919191;
+    font-weight: 600;
+    width:75%;
+    margin : 10px auto ;
+
+}
+#sign_up_box p:last-child, #sign_up_box a{
+    font-size:1em;
+    color: #919191;
+    width:65%;
+    margin:15px auto 40px auto;
+}
+#sign_up_box a{
+    font-weight: 600;
+}
+.short_line{
+    height:1px;
+    display:inline-block;
+    width: 40%;
+    background-color: #0000000a;
+    margin : 3px;
+}
+#divide-line{
+    color: #919191;
+    font-weight: 500;
+    font-size:0.9em;
+    margin: 20px auto;
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.imstargram.school.dao.SchoolDAO">
+    <select id="selectUsers" resultType="org.demo.imstargram.school.model.User">
+      SELECT name AS name
+      , age AS age
+      , phone AS phone
+      FROM student_info
+    </select>
+</mapper>
