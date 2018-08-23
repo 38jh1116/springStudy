@@ -1,15 +1,17 @@
 .list-container{
     margin : 100px auto;
-    width:1550px;
+    width:fit-content;
 }
-#user-info-table {
+#info-table {
+    width:100%;
+    clear:both;
     margin : 20px auto;
     line-height:40px;
     vertical-align: center;
 }
 #sort-by{
     display: inline-block;
-    width : 150px;
+    width : 180px;
     float : left;
 }
 

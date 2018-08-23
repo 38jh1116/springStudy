@@ -1,9 +1,6 @@
 package org.demo.imstargram.school.controller;
 
-import org.demo.imstargram.school.manager.LoginManager;
-import org.demo.imstargram.school.manager.ProfessorManager;
-import org.demo.imstargram.school.manager.SampleManager;
-import org.demo.imstargram.school.manager.StudentManager;
+import org.demo.imstargram.school.manager.*;
 import org.demo.imstargram.school.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +19,13 @@ public class SchoolController {
     private LoginManager loginManager;
     private StudentManager studentManager;
     private ProfessorManager professorManager;
+    private SubjectManager subjectManager;
 
     public SchoolController(){
         loginManager = new LoginManager();
         studentManager = new StudentManager();
         professorManager = new ProfessorManager();
+        subjectManager = new SubjectManager();
 
     }
 
@@ -253,6 +252,103 @@ public class SchoolController {
         return resultMessage;
     }
 
+
+    @GetMapping("/school/subject")
+    public String goSubjectMenu() {
+        return "school/subject";
+    }
+
+    @GetMapping("/school/subject/search")
+    public String searchSubjectInfo(Model model, SearchCondition subjectSearchCondition){
+
+        String sortOption = subjectSearchCondition.getSortOption();
+        String searchOption = subjectSearchCondition.getSearchOption();
+        String searchTarget = subjectSearchCondition.getSearchTarget();
+
+        List<Subject> targetSubjectList = new ArrayList<>();
+        List<Subject> result = new ArrayList<>();
+
+        switch(sortOption){
+            case "subject_num":
+                targetSubjectList = subjectManager.sortSubjectsInfoBySubjectNum();
+                break;
+            case "name":
+                targetSubjectList = subjectManager.sortSubjectsInfoByName();
+                break;
+        }
+
+        switch(searchOption){
+            case "all":
+                result = targetSubjectList;
+                break;
+            case "subject_num":
+                for(Subject subject : targetSubjectList){
+                    if(subject.getSubjectNum().equals(searchTarget)){
+                        result.add(subject);
+                    }
+                }
+                break;
+            case "name":
+                for(Subject subject : targetSubjectList){
+                    if(subject.getName().equals(searchTarget)){
+                        result.add(subject);
+                    }
+                }
+                break;
+        }
+        String nextSubjectNum = subjectManager.getNewSubjectNum(false);
+        model.addAttribute("subject_list",result);
+        model.addAttribute("next_subject_num",nextSubjectNum);
+
+        return "school/subject_info";
+    }
+
+
+    @GetMapping("/school/subject/subject_list")
+    public String showAllSubjectInfo(Model model) {
+        List<Subject> subjectList = subjectManager.getAllSubjectsInfo();
+        String nextSubjectNum = subjectManager.getNewSubjectNum(false);
+        model.addAttribute("subject_list",subjectList);
+        model.addAttribute("next_subject_num",nextSubjectNum);
+        return "school/subject_info";
+    }
+
+
+    @PostMapping("/school/subject/save_subject")
+    @ResponseBody
+    public Map<String, String> saveSubjectInfo(Subject newSubject){
+
+        ResultCode saveResult = subjectManager.saveSubjectInfo(newSubject);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", saveResult.getResult());
+        resultMessage.put("msg", saveResult.getMsg());
+        return resultMessage;
+    }
+    @PostMapping("/school/subject/modify_subject")
+    @ResponseBody
+    public Map<String,String> modifySubjectInfo(Subject targetSubject){
+
+        ResultCode modifyResult = subjectManager.modifySubjectInfo(targetSubject);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", modifyResult.getResult());
+        resultMessage.put("msg", modifyResult.getMsg());
+        return resultMessage;
+
+    }
+
+    @PostMapping("/school/subject/remove_subject")
+    @ResponseBody
+    public Map<String,String> removeSubjectInfo(Subject targetSubject){
+
+        ResultCode removeResult = subjectManager.removeSubjectInfo(targetSubject.getSubjectNum());
+
+        Map<String,String> resultMessage = new HashMap<>();
+        resultMessage.put("result", removeResult.getResult());
+        resultMessage.put("msg", removeResult.getMsg());
+        return resultMessage;
+    }
 
 //    @RequestMapping(value="/school/search_student",produces="application/json;charset=utf-8")
 //    public String searchStudentInfoByStudentNum(Model model, @RequestBody Map<String,String> searchInfo){
