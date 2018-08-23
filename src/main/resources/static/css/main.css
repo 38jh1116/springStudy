@@ -1,0 +1,53 @@
+.list-container{
+    margin : 100px auto;
+    width:1550px;
+}
+#user-info-table {
+    margin : 20px auto;
+    line-height:40px;
+    vertical-align: center;
+}
+#sort-by{
+    display: inline-block;
+    width : 150px;
+    float : left;
+}
+
+#search-bar{
+    display: inline-block;
+    width : 300px;
+    float : left;
+}
+#search-by{
+    display: inline-block;
+    width : 100px;
+    margin-right: 5px;
+    margin-top:7px;
+    float : left;
+}
+#option-menu{
+    display: inline-block;
+    height:50px;
+    line-height:50px;
+    vertical-align: center;
+    margin : 20px 0;
+    float:right;
+}
+.btn-icon{
+    box-shadow: 1px 1px 3px grey;
+}
+
+input:disabled {
+    background: white !important;
+    border-style: none;
+}
+#search-by select{
+    width:100px;
+    height:40px;
+    line-height: 40px;
+    vertical-align: center;
+}
+.menu-title{
+    text-align: center;
+    margin-bottom: 80px;
+}

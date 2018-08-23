@@ -19,7 +19,7 @@
 </p>
 <div class="container" style="width:500px; margin-top:200px;">
     <button type="button" class="btn btn-outline-primary btn-block" onclick="location='/school/student'">Student Menu</button>
-    <button type="button" class="btn btn-outline-secondary btn-block">Professor Menu</button>
+    <button type="button" class="btn btn-outline-secondary btn-block" onclick="location='/school/professor'">Professor Menu</button>
     <button type="button" class="btn btn-outline-success btn-block">Subject Menu</button>
     <button type="button" class="btn btn-outline-info btn-block">Course Menu</button>
     <button type="button" class="btn btn-outline-warning btn-block">Registration Menu</button>
