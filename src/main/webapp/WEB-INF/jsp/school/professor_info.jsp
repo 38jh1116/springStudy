@@ -20,7 +20,7 @@
 </c:if>
  <c:if test="${empty professor_list}">
         <tr>
-            <td colspan="6" style="text-align:center">조회된 데이터가 없습니다.</td>
+            <td colspan="8" style="text-align:center">조회된 데이터가 없습니다.</td>
         </tr>
  </c:if>
         <tr id="input-new-info" style="border-top: 2px solid darkgrey;">

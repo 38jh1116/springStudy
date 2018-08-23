@@ -33,7 +33,7 @@
             <button id="search-btn" class="btn btn-default btn-icon">조회</button>
         </div>
     </div>
-    <table class="table" id="user-info-table" name="user-info-table">
+    <table class="table" id="info-table" name="info-table">
         <thead>
         <tr>
             <th>학번</th>
