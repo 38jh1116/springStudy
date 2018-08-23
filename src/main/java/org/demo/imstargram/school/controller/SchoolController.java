@@ -1,12 +1,10 @@
 package org.demo.imstargram.school.controller;
 
 import org.demo.imstargram.school.manager.LoginManager;
+import org.demo.imstargram.school.manager.ProfessorManager;
 import org.demo.imstargram.school.manager.SampleManager;
 import org.demo.imstargram.school.manager.StudentManager;
-import org.demo.imstargram.school.model.Admin;
-import org.demo.imstargram.school.model.ResultCode;
-import org.demo.imstargram.school.model.Student;
-import org.demo.imstargram.school.model.StudentSearchCondition;
+import org.demo.imstargram.school.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +21,13 @@ import java.util.Map;
 public class SchoolController {
     private LoginManager loginManager;
     private StudentManager studentManager;
+    private ProfessorManager professorManager;
 
     public SchoolController(){
         loginManager = new LoginManager();
         studentManager = new StudentManager();
+        professorManager = new ProfessorManager();
+
     }
 
     @Autowired
@@ -64,7 +65,7 @@ public class SchoolController {
         return "school/student";
     }
     @GetMapping("/school/student/search")
-    public String searchStudentInfo(Model model, StudentSearchCondition studentSearchCondition){
+    public String searchStudentInfo(Model model, SearchCondition studentSearchCondition){
 
         String sortOption = studentSearchCondition.getSortOption();
         String searchOption = studentSearchCondition.getSearchOption();
@@ -148,6 +149,103 @@ public class SchoolController {
     public Map<String,String> removeStudentInfo(Student targetStudent){
 
         ResultCode removeResult = studentManager.removeStudentInfo(targetStudent.getStudentNum());
+
+        Map<String,String> resultMessage = new HashMap<>();
+        resultMessage.put("result", removeResult.getResult());
+        resultMessage.put("msg", removeResult.getMsg());
+        return resultMessage;
+    }
+
+    @GetMapping("/school/professor")
+    public String goProfessorMenu() {
+        return "school/professor";
+    }
+
+    @GetMapping("/school/professor/search")
+    public String searchProfessorInfo(Model model, SearchCondition professorSearchCondition){
+
+        String sortOption = professorSearchCondition.getSortOption();
+        String searchOption = professorSearchCondition.getSearchOption();
+        String searchTarget = professorSearchCondition.getSearchTarget();
+
+        List<Professor> targetProfessorList = new ArrayList<>();
+        List<Professor> result = new ArrayList<>();
+
+        switch(sortOption){
+            case "professor_num":
+                targetProfessorList = professorManager.sortProfessorsInfoByProfessorNum();
+                break;
+            case "name":
+                targetProfessorList = professorManager.sortProfessorInfoByName();
+                break;
+        }
+
+        switch(searchOption){
+            case "all":
+                result = targetProfessorList;
+                break;
+            case "professor_num":
+                for(Professor professor : targetProfessorList){
+                    if(professor.getProfessorNum().equals(searchTarget)){
+                        result.add(professor);
+                    }
+                }
+                break;
+            case "name":
+                for(Professor professor : targetProfessorList){
+                    if(professor.getName().equals(searchTarget)){
+                        result.add(professor);
+                    }
+                }
+                break;
+        }
+        String nextProfessorNum = professorManager.getNewProfessorNum(false);
+        model.addAttribute("professor_list",result);
+        model.addAttribute("next_professor_num",nextProfessorNum);
+
+        return "school/professor_info";
+    }
+
+
+    @GetMapping("/school/professor/professor_list")
+    public String showAllProfessorInfo(Model model) {
+        List<Professor> professorList = professorManager.getAllProfessorsInfo();
+        String nextProfessorNum = professorManager.getNewProfessorNum(false);
+        model.addAttribute("professor_list",professorList);
+        model.addAttribute("next_professor_num",nextProfessorNum);
+        return "school/professor_info";
+    }
+
+
+    @PostMapping("/school/professor/save_professor")
+    @ResponseBody
+    public Map<String, String> saveProfessorInfo(Professor newProfessor){
+
+        ResultCode saveResult = professorManager.saveProfessorInfo(newProfessor);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", saveResult.getResult());
+        resultMessage.put("msg", saveResult.getMsg());
+        return resultMessage;
+    }
+    @PostMapping("/school/professor/modify_professor")
+    @ResponseBody
+    public Map<String,String> modifyProfessorInfo(Professor targetProfessor){
+
+        ResultCode modifyResult = professorManager.modifyProfessorInfo(targetProfessor);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", modifyResult.getResult());
+        resultMessage.put("msg", modifyResult.getMsg());
+        return resultMessage;
+
+    }
+
+    @PostMapping("/school/professor/remove_professor")
+    @ResponseBody
+    public Map<String,String> removeProfessorInfo(Professor targetProfessor){
+
+        ResultCode removeResult = professorManager.removeProfessorInfo(targetProfessor.getProfessorNum());
 
         Map<String,String> resultMessage = new HashMap<>();
         resultMessage.put("result", removeResult.getResult());
