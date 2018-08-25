@@ -164,8 +164,8 @@ public class ProfessorDAO {
         return Integer.toString(nextProfessorNum);
     }
 
-    public List<Professor> selectProfessorInfo(String professorNum) {
-        List<Professor> selectedProfessor = new ArrayList<>();
+    public Professor selectProfessorInfo(String professorNum) {
+        Professor selectedProfessor = null;
         Professor currentProfessor;
         try {
             if(!professorInfo.exists()) return selectedProfessor;
@@ -177,7 +177,7 @@ public class ProfessorDAO {
             while ((line = bufReader.readLine()) != null) {
                 currentProfessor = convertStringToProfessor(line);
                 if (currentProfessor.getProfessorNum().equals(professorNum)) {
-                    selectedProfessor.add(currentProfessor);
+                    selectedProfessor=currentProfessor;
                     break;
                 }
             }

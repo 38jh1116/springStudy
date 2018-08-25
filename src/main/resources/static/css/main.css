@@ -1,3 +1,6 @@
+body {
+    padding : 0 100px;!important;
+}
 .list-container{
     margin : 100px auto;
     width:fit-content;
@@ -49,7 +52,11 @@ input:disabled {
     line-height: 40px;
     vertical-align: center;
 }
+
 .menu-title{
     text-align: center;
     margin-bottom: 80px;
+}
+.course-class-number , .subject-credit{
+    width:100px;!important;
 }
