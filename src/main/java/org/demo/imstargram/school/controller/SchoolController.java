@@ -20,12 +20,14 @@ public class SchoolController {
     private StudentManager studentManager;
     private ProfessorManager professorManager;
     private SubjectManager subjectManager;
+    private CourseManager courseManager;
 
     public SchoolController(){
         loginManager = new LoginManager();
         studentManager = new StudentManager();
         professorManager = new ProfessorManager();
         subjectManager = new SubjectManager();
+        courseManager = new CourseManager();
 
     }
 
@@ -343,6 +345,113 @@ public class SchoolController {
     public Map<String,String> removeSubjectInfo(Subject targetSubject){
 
         ResultCode removeResult = subjectManager.removeSubjectInfo(targetSubject.getSubjectNum());
+
+        Map<String,String> resultMessage = new HashMap<>();
+        resultMessage.put("result", removeResult.getResult());
+        resultMessage.put("msg", removeResult.getMsg());
+        return resultMessage;
+    }
+
+    @GetMapping("/school/course")
+    public String goCourseMenu() {
+        return "school/course";
+    }
+
+    @GetMapping("/school/course/search")
+    public String searchCourseInfo(Model model, SearchCondition courseSearchCondition){
+
+        String sortOption = courseSearchCondition.getSortOption();
+        String searchOption = courseSearchCondition.getSearchOption();
+        String searchTarget = courseSearchCondition.getSearchTarget();
+
+        List<Course> targetCourseList = new ArrayList<>();
+        List<Course> result = new ArrayList<>();
+
+        switch(sortOption){
+            case "subject_num":
+                targetCourseList = courseManager.sortCoursesInfoBySubjectNum();
+                break;
+            case "subject_name":
+                targetCourseList = courseManager.sortCoursesInfoBySubjectName();
+                break;
+        }
+
+        switch(searchOption){
+            case "all":
+                result = targetCourseList;
+                break;
+            case "subject_num":
+                for(Course course : targetCourseList){
+                    if(course.getCourseNum().equals(searchTarget)){
+                        result.add(course);
+                    }
+                }
+                break;
+            case "subject_name":
+                for(Course course : targetCourseList){
+                    if(course.getSubject().getName().equals(searchTarget)){
+                        result.add(course);
+                    }
+                }
+                break;
+            case "professor_name":
+                for(Course course : targetCourseList){
+                    if(course.getProfessor().getName().equals(searchTarget)){
+                        result.add(course);
+                    }
+                }
+                break;
+        }
+        String nextCourseNum = courseManager.getNewCourseNum(false);
+        List<Professor> professorList = professorManager.getAllProfessorsInfo();
+        List<Subject> subjectList = subjectManager.getAllSubjectsInfo();
+        model.addAttribute("course_list",result);
+        model.addAttribute("next_course_num",nextCourseNum);
+        model.addAttribute("subject_list",subjectList);
+        model.addAttribute("professor_list",professorList);
+        return "school/course_info";
+    }
+
+
+    @GetMapping("/school/course/course_list")
+    public String showAllCourseInfo(Model model) {
+        List<Course> courseList = courseManager.getAllCoursesInfo();
+        String nextCourseNum = courseManager.getNewCourseNum(false);
+        model.addAttribute("course_list",courseList);
+        model.addAttribute("next_course_num",nextCourseNum);
+        return "school/course_info";
+    }
+
+
+    @PostMapping("/school/course/save_course")
+    @ResponseBody
+    public Map<String, String> saveCourseInfo(Course newCourse){
+
+        ResultCode saveResult = courseManager.saveCourseInfo(newCourse);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", saveResult.getResult());
+        resultMessage.put("msg", saveResult.getMsg());
+        return resultMessage;
+    }
+    @PostMapping("/school/course/modify_course")
+    @ResponseBody
+    public Map<String,String> modifyCourseInfo(Course targetCourse){
+
+        ResultCode modifyResult = courseManager.modifyCourseInfo(targetCourse);
+
+        Map<String, String> resultMessage = new HashMap<>();
+        resultMessage.put("result", modifyResult.getResult());
+        resultMessage.put("msg", modifyResult.getMsg());
+        return resultMessage;
+
+    }
+
+    @PostMapping("/school/course/remove_course")
+    @ResponseBody
+    public Map<String,String> removeCourseInfo(Course targetCourse){
+
+        ResultCode removeResult = courseManager.removeCourseInfo(targetCourse.getCourseNum());
 
         Map<String,String> resultMessage = new HashMap<>();
         resultMessage.put("result", removeResult.getResult());

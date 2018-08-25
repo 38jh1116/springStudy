@@ -22,6 +22,6 @@
 <tr id="input-new-info" style="border-top: 2px solid darkgrey;">
     <td>New</td>
     <td><input id= "name" class = "form-control" type = "text" placeholder="Name" required></td>
-    <td><input id= "credit" class = "form-control" type = "number" min = "1" max="12" width="30px" placeholder="Credit" required></td>
+    <td><input id= "credit" class = "form-control subject-credit" type = "number" min = "1" max="12" width="30px" placeholder="Credit" required></td>
     <td><button id="save-subject-info" class ="btn btn-outline-success btn-block">추가하기</button></td>
 </tr>

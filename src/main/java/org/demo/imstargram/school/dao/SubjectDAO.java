@@ -185,8 +185,8 @@ public class SubjectDAO {
         return Integer.toString(nextSubjectNum);
     }
 
-    public List<Subject> selectSubjectInfo(String subjectNum) {
-        List<Subject> selectedSubject = new ArrayList<>();
+    public Subject selectSubjectInfo(String subjectNum) {
+        Subject selectedSubject = null;
         Subject currentSubject;
         try {
             if(!subjectInfo.exists()) return selectedSubject;
@@ -199,7 +199,7 @@ public class SubjectDAO {
             while ((line = bufReader.readLine()) != null) {
                 currentSubject = convertStringToSubject(line);
                 if (currentSubject.getSubjectNum().equals(subjectNum)) {
-                    selectedSubject.add(currentSubject);
+                    selectedSubject = currentSubject;
                     break;
                 }
             }

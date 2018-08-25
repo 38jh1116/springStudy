@@ -65,14 +65,15 @@ public class StudentManager {
         return removeResult;
 
     }
-
-    public List<Student> searchStudentInfoByStudentNum(String targetStudentNum) {
+    /*
+    public Student searchStudentInfoByStudentNum(String targetStudentNum) {
         return studentDAO.selectStudentInfo(targetStudentNum);
     }
 
     public List<Student> searchStudentsInfoByName(String targetStudentName){
         return studentDAO.selectStudentsInfoByName(targetStudentName);
     }
+    */
 
     public List<Student> sortStudentsInfoByStudentNum() {
         return studentDAO.sortStudentsInfoByStudentNum();

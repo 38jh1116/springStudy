@@ -59,6 +59,8 @@ public class SubjectManager {
         return removeResult;
 
     }
+    
+    /*
     public List<Subject> searchSubjectInfo(String targetSubjectNum) {
         return subjectDAO.selectSubjectInfo(targetSubjectNum);
     }
@@ -66,6 +68,7 @@ public class SubjectManager {
     public List<Subject> searchSubjectsInfoByName(String targetSubjectName){
         return subjectDAO.selectSubjectsInfoByName(targetSubjectName);
     }
+    */
 
     public List<Subject> sortSubjectsInfoBySubjectNum() {
         return subjectDAO.sortSubjectsInfoBySubjectNum();

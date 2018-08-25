@@ -6,7 +6,6 @@
     <title>Management Program</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href=".css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type = "text/javascript" src = "/js/jquery-3.3.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -24,7 +23,8 @@
         </div>
         <div id="search-by" class="dropdown">
             <select>
-                <option value="student_num" selected="selected">학번</option>
+                <option value="all" selected>검색조건</option>
+                <option value="student_num">학번</option>
                 <option value="name">이름</option>
             </select>
         </div>

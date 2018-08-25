@@ -71,6 +71,7 @@ public class ProfessorManager {
 
     }
 
+    /*
     public List<Professor> inquireProfessorInfoByProfessorNum(String targetProfessorNum) {
         return professorDAO.selectProfessorInfo(targetProfessorNum);
     }
@@ -78,6 +79,7 @@ public class ProfessorManager {
     public List<Professor> inquireProfessorsInfoByName(String targetProfessorName){
         return professorDAO.selectProfessorsInfoByName(targetProfessorName);
     }
+    */
 
     public List<Professor> sortProfessorsInfoByProfessorNum() {
         return professorDAO.sortProfessorsInfoByProfessorNum();

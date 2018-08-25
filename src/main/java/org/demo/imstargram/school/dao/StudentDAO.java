@@ -187,8 +187,8 @@ public class StudentDAO {
 
         return Integer.toString(nextStudentNum);
     }
-    public List<Student> selectStudentInfo(String studentNum){
-        List<Student> selectedStudent = new ArrayList<>();
+    public Student selectStudentInfo(String studentNum){
+        Student selectedStudent = null;
         Student currentStudent;
         try {
             if(!studentInfo.exists()) return selectedStudent;
@@ -201,7 +201,7 @@ public class StudentDAO {
             while ((line = bufReader.readLine()) != null) {
                 currentStudent = convertStringToStudent(line);
                 if (currentStudent.getStudentNum().equals(studentNum)) {
-                    selectedStudent.add(currentStudent);
+                    selectedStudent = currentStudent;
                     break;
                 }
             }

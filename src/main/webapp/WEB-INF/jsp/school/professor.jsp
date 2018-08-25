@@ -23,7 +23,8 @@
         </div>
         <div id="search-by" class="dropdown">
             <select>
-                <option value="professor_num" selected="selected">직번</option>
+                <option value="all" selected="selected">검색조건</option>
+                <option value="professor_num">직번</option>
                 <option value="name">이름</option>
             </select>
         </div>
